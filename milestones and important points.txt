@@ -20,5 +20,5 @@ installed packages in the backened/server:
 (10) mongoose
 (11) morgan
 (12) @sendgrid/mail
-(13)
+(13) crypto: it's the core node.js module to hash the password for better security.
 (14)

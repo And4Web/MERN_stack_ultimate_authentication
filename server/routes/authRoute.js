@@ -1,15 +1,12 @@
 const express = require('express');
 const router = express.Router();
 
-router.get('/test', (req, res) => {
-  res.json("Hello this is test route.");
-})
-router.get('/signup', (req, res) => {
-  res.json("Hello this is signup route.");
-})
+//import controllers
+const {signup} = require('../controllers/authController');
 
-router.get('/', (req, res) => {
-  res.json("Hello Anand!");
+router.get('/test', (req, res) => {
+  res.send("Hello this is the test route.");
 })
+router.get('/signup', signup);
 
 module.exports = router;

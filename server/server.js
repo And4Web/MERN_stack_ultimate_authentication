@@ -9,6 +9,10 @@ const authRouter = require('./routes/authRoute');
 
 app.use(express.json());
 
-app.use('/api', authRouter)
+app.get('/', (req, res) => {
+  res.json("Hello Anand!");
+})
+
+app.use('/api/auth', authRouter)
 
 app.listen(port, () => console.log(`Server is running at port: ${port}.`))
