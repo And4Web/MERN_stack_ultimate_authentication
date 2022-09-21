@@ -1,0 +1,19 @@
+{
+  "name": "mern-ultimate-authentication",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/And4Web/MERN_stack_ultimate_authentication.git"
+  },
+  "author": "Anand Shukla",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/And4Web/MERN_stack_ultimate_authentication/issues"
+  },
+  "homepage": "https://github.com/And4Web/MERN_stack_ultimate_authentication#readme"
+}

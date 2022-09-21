@@ -1,0 +1,24 @@
+In this project I'm building an ultimate authentication system using MERN stack i.e. MongoDB, Express.js, React.js and Node.js. 
+I've built a production ready complete authentication system which has
+email activation logging with Facebook, log in with Google, forgot password 
+and we have even created private and protected routes.
+
+We have created the middleware in the back end.
+
+We have protected the bases in the funding.
+
+installed packages in the backened/server:
+(1)
+(2)
+(3)
+(4)
+(5)
+(6)
+(7)
+(8)
+(9)
+(10)
+(11)
+(12)
+(13)
+(14)
