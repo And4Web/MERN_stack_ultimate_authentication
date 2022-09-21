@@ -5,9 +5,19 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 require('dotenv').config();
 
+const port = process.env.PORT || 5000;
 const app = express();
 
-const port = process.env.PORT || 5000;
+//Database connection
+mongoose.connect(process.env.DATABASE, {
+  //use these properties for mongoose deprecation warnings:
+  useNewUrlParser: true,
+  // useFindAndModify: false,
+  useUnifiedTopology: true,
+  // useCreateIndex: true
+})
+.then(() => console.log('mongoDB connection successful.'))
+.catch(err => console.log('mongoDB connection Error: ', err))
 
 //import routes
 const authRouter = require('./routes/authRoute');
@@ -24,7 +34,7 @@ if(process.env.NODE_ENV = 'development'){
 
 
 app.get('/', (req, res) => {
-  res.json("Hello Anand!");
+  res.send("Hello Anand! 🤠");
 })
 
 //implement routes
