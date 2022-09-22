@@ -1,7 +1,7 @@
 const User = require('../models/userModel');
 
-exports.signup = (req, res) => {
-  // res.json("Hello this is the signup route.");
+/*exports.signup = (req, res) => {
+ 
   const {name, email, password} = req.body;
 
   User.findOne({email}).exec((err, user) => {
@@ -23,4 +23,13 @@ exports.signup = (req, res) => {
       })
     })
   })
+}
+*/
+
+/*
+
+another approach: The above approach is ok for small apps, but we will be using the concept of email confirmation, in order to save our database from spam user emails. This approach is used in real life applications. If an user provides a valid email then he will receive a confirmation email and only by varifying he will be stored in the database. In that confirmation email we will send the user signup information encoded in jwt.
+*/
+exports.signup = (req, res) => {
+  
 }
