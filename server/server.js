@@ -32,7 +32,6 @@ if(process.env.NODE_ENV = 'development'){
 
 //middleware
 
-
 app.get('/', (req, res) => {
   res.send("Hello Anand! 🤠");
 })
