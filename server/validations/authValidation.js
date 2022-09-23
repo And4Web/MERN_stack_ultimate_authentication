@@ -6,5 +6,12 @@ exports.userSignupValidator = [
   check('email').not().isEmpty().withMessage('Email is required.'),
   check('password').not().isEmpty().withMessage('Password is required.'),
   check('password').isLength({min: 8}).withMessage('Password must be at least 8 character long.'),
-
 ];
+
+exports.userSigninValidator = [
+  check('email').isEmail().withMessage('invalid Email.'),
+  check('email').not().isEmpty().withMessage('Email is required.'),
+  check('password').not().isEmpty().withMessage('Password is required.'),
+  check('password').isLength({min: 8}).withMessage('Password must be at least 8 character long.'),
+];
+

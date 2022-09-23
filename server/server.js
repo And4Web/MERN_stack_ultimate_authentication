@@ -19,6 +19,8 @@ mongoose.connect(process.env.DATABASE, {
 .then(() => console.log('mongoDB connection successful.'))
 .catch(err => console.log('mongoDB connection Error: ', err))
 
+const User = require('./models/userModel');
+
 //import routes
 const authRouter = require('./routes/authRoute');
 
@@ -34,6 +36,11 @@ if(process.env.NODE_ENV = 'development'){
 
 app.get('/', (req, res) => {
   res.send("Hello Anand! 🤠");
+})
+app.get('/api/users', (req, res) => {
+ User.find({}, {hashedPassword: 0, salt: 0, __v:0}).then(user => {  
+  res.status(200).json(user)
+ })
 })
 
 //implement routes

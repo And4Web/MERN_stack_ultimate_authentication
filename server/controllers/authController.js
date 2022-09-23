@@ -112,3 +112,29 @@ exports.activateAccount = (req, res) => {
     })
   }
 }
+
+exports.signin = (req, res) => {
+  const {email, password} = req.body;
+  User.findOne({email}).exec((err, user) => {
+    //check if user exists
+    if(!user || err){
+      return res.status(400).json({
+        error: 'User with this email doesn\'t exist. Please sign up.'
+      })
+    }
+    // authenticate
+    if(!user.authenticate(password)){
+      return res.status(401).json({
+        error: 'Wrong Password. Please try again.'
+      })
+    }
+    //generate token and send to the client
+    const token = jwt.sign({_id: user._id}, process.env.JWT_SECRET, {expiresIn: '1d'});
+    const {_id, name, email, role} = user;
+
+    return res.json({
+      token,
+      user: {_id, name, email, role}
+    })
+  })
+}
