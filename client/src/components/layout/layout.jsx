@@ -1,16 +1,17 @@
 import React, {Fragment} from 'react';
+import {Link} from 'react-router-dom';
 
 function Layout({children}) {
   const nav = () => (
     <ul className='nav nav-tabs bg-primary justify-content-center'>
       <li className='nav-item'>
-        <a href="/" className='text-light nav-link'>Home</a>
+        <Link to="/" className='text-light nav-link'>Home</Link>
       </li>
       <li className='nav-item'>
-        <a href="/" className='text-light nav-link'>Sign in</a>
+        <Link to="/signin" className='text-light nav-link'>Sign in</Link>
       </li>
       <li className='nav-item'>
-        <a href="/" className='text-light nav-link'>Sign up</a>
+        <Link to="/signup" className='text-light nav-link'>Sign up</Link>
       </li>
     </ul>
   )
