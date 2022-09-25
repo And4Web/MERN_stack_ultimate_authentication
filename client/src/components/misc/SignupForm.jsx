@@ -16,6 +16,7 @@ function SignupForm() {
     // console.log(event.target)
     setValues({...values, [name]: event.target.value})
   };
+  
   let handleSubmit = event => {
     event.preventDefault();
     setValues({...values, buttonText: 'Submitting'});

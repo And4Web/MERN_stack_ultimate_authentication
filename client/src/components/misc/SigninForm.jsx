@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 function SigninForm() {
   let [values, setValues] = useState({
@@ -7,13 +9,30 @@ function SigninForm() {
     buttonText: "Submit",
   });
 
-  let { name, email, password, buttonText } = values;
+  let { email, password, buttonText } = values;
   // console.log(values);
-  const handleChange = (name = (event) => {
-    //todo
-  });
-  const handleSubmit = (event) => {
-    //todo
+  let handleChange = name => event => {
+    // console.log(event.target)
+    setValues({...values, [name]: event.target.value})
+  };
+
+  let handleSubmit = event => {
+    event.preventDefault();
+    setValues({...values, buttonText: 'Submitting'});
+    axios({
+      method: 'POST',
+      url: `${process.env.REACT_APP_API_URL}/auth/signin`,
+      data: {email, password }
+    }).then(response => {
+      console.log('SIGNIN SUCCESS: ', response);
+      // save the response (user, token) in localstorage/cookie
+      setValues({...values, email: '', password: ''});
+      toast.success(`Hey, ${response.data.user.name}, welcome back!`);
+    }).catch(err => {
+      console.log("SIGNIN ERROR: ", err.response.data);
+      setValues({...values, email: '', password: '', buttonText: 'Submit'});
+      toast.error(err.response.data.error);
+    })
   };
 
   return (
