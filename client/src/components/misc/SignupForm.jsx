@@ -1,28 +1,49 @@
 import React, { useState } from "react";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 function SignupForm() {
   let [values, setValues] = useState({
-    name: "anand",
-    email: "and@gmail.com",
-    password: "askdjfaj",
+    name: "",
+    email: "",
+    password: "",
     buttonText: "Submit",
   });
+
   let { name, email, password, buttonText } = values;
-  // console.log(values);
-  const handleChange = (name = (event) => {
-    //todo
-  });
-  const handleSubmit = (event) => {
-    //todo
+  
+  let handleChange = name => event => {
+    // console.log(event.target)
+    setValues({...values, [name]: event.target.value})
+  };
+  let handleSubmit = event => {
+    event.preventDefault();
+    setValues({...values, buttonText: 'Submitting'});
+    axios({
+      method: 'POST',
+      url: `${process.env.REACT_APP_API_URL}/auth/signup`,
+      data: {name, email, password, }
+    }).then(response => {
+      console.log('SIGNUP SUCCESS: ', response);
+      setValues({...values, name: '', email: '', password: ''});
+      toast.success(response.data.message);
+    }).catch(err => {
+      console.log("SIGNUP ERROR: ", err.response.data);
+      setValues({...values, name: '', email: '', password: '', buttonText: 'Submit'});
+      toast.error(err.response.data.error);
+    })
   };
 
   return (
     <form>
+      {/* {JSON.stringify({...values})} */}
       <div className="d-flex justify-content-center">
         <div className="form-group w-100">
           <label className="text-muted">Name</label>
           <input
-            onChange={handleChange("name")}
+            value={name}
+            name={name}
+            onChange={handleChange('name')}
             type="text"
             className="form-control"
           />
@@ -33,7 +54,9 @@ function SignupForm() {
         <div className="form-group w-100">
           <label className="text-muted">Email</label>
           <input
-            onChange={handleChange("email")}
+            value={email}
+            name={email}
+            onChange={handleChange('email')}
             type="email"
             className="form-control"
           />
@@ -44,7 +67,9 @@ function SignupForm() {
         <div className="form-group w-100">
           <label className="text-muted">Password</label>
           <input
-            onChange={handleChange("password")}
+            value={password}
+            name={password}
+            onChange={handleChange('password')}
             type="password"
             className="form-control"
           />
