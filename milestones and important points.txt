@@ -1,0 +1,24 @@
+In this project I'm building an ultimate authentication system using MERN stack i.e. MongoDB, Express.js, React.js and Node.js. 
+I've built a production ready complete authentication system which has
+email activation logging with Facebook, log in with Google, forgot password 
+and we have even created private and protected routes.
+
+We have created the middleware in the back end.
+
+We have protected the bases in the funding.
+
+installed packages in the backened/server:
+(1) Express
+(2) Nodemon
+(3) body-parser
+(4) cors
+(5) dotenv
+(6) express-jwt
+(7) express-validator
+(8) google-auth-library
+(9) jsonwebtoken
+(10) mongoose
+(11) morgan
+(12) @sendgrid/mail
+(13) crypto: it's the core node.js module to hash the password for better security. We can use bcrypt also.
+(14)
