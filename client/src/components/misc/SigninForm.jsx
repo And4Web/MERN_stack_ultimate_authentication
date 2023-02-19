@@ -4,8 +4,8 @@ import { toast } from "react-toastify";
 
 function SigninForm() {
   let [values, setValues] = useState({
-    email: "and@gmail.com",
-    password: "askdjfaj",
+    email: "",
+    password: "",
     buttonText: "Submit",
   });
 
@@ -24,12 +24,12 @@ function SigninForm() {
       url: `${process.env.REACT_APP_API_URL}/auth/signin`,
       data: {email, password }
     }).then(response => {
-      console.log('SIGNIN SUCCESS: ', response);
+      // console.log('SIGNIN SUCCESS: ', response);
       // save the response (user, token) in localstorage/cookie
-      setValues({...values, email: '', password: ''});
+      setValues({...values, email: '', password: '', buttonText: "Submitted"});
       toast.success(`Hey, ${response.data.user.name}, welcome back!`);
     }).catch(err => {
-      console.log("SIGNIN ERROR: ", err.response.data);
+      // console.log("SIGNIN ERROR: ", err.response.data);
       setValues({...values, email: '', password: '', buttonText: 'Submit'});
       toast.error(err.response.data.error);
     })
@@ -44,6 +44,7 @@ function SigninForm() {
             onChange={handleChange("email")}
             type="email"
             className="form-control"
+            value={email}
           />
         </div>
       </div>
@@ -55,6 +56,7 @@ function SigninForm() {
             onChange={handleChange("password")}
             type="password"
             className="form-control"
+            value={password}
           />
         </div>
       </div>
