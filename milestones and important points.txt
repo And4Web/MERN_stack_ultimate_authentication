@@ -21,4 +21,4 @@ installed packages in the backened/server:
 (11) morgan
 (12) @sendgrid/mail
 (13) crypto: it's the core node.js module to hash the password for better security. We can use bcrypt also.
-(14)
+(14) js-cookie

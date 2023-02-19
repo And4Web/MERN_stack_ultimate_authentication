@@ -28,12 +28,12 @@ function Activate({match}) {
       url: `${process.env.REACT_APP_API_URL}/auth/account-activation`,
       data: {name, token}
     }).then(response => {
-      console.log('ACTIVATION SUCCESS: ', response);
+      // console.log('ACTIVATION SUCCESS: ', response);
       // save the response (user, token) in localstorage/cookie
-      setValues({...values, email: '', password: ''});
+      setValues({...values, email: '', password: '', show: false});
       toast.success(`Hey, ${response.data.user.name}, welcome back!`);
     }).catch(err => {
-      console.log("SIGNIN ERROR: ", err.response.data);
+      // console.log("SIGNIN ERROR: ", err.response.data);
       setValues({...values, email: '', password: '', buttonText: 'Submit'});
       toast.error(err.response.data.error);
     })

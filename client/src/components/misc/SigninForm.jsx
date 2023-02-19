@@ -1,13 +1,20 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
+import {useNavigate} from "react-router-dom";
+
+import {authenticate, isAuth} from '../misc/helpers';
 
 function SigninForm() {
   let [values, setValues] = useState({
     email: "",
     password: "",
-    buttonText: "Submit",
+    buttonText: "Submit",    
   });
+  let [success, setSuccess] = useState(false);
+  let [name, setName] = useState('');
+
+  let navigate = useNavigate();
 
   let { email, password, buttonText } = values;
   // console.log(values);
@@ -26,8 +33,19 @@ function SigninForm() {
     }).then(response => {
       // console.log('SIGNIN SUCCESS: ', response);
       // save the response (user, token) in localstorage/cookie
-      setValues({...values, email: '', password: '', buttonText: "Submitted"});
-      toast.success(`Hey, ${response.data.user.name}, welcome back!`);
+      authenticate(response, ()=>{
+        setValues({...values, email: '', password: '', buttonText: "Submitted"});
+        setSuccess(true);     
+        setName(response.data.user.name);
+        toast.success(`Hey, ${response.data.user.name}, welcome back!`);
+
+      })
+     
+      if(isAuth()){
+        setTimeout(()=>{
+          navigate('/');       
+        }, 5000)
+      } 
     }).catch(err => {
       // console.log("SIGNIN ERROR: ", err.response.data);
       setValues({...values, email: '', password: '', buttonText: 'Submit'});
@@ -35,7 +53,7 @@ function SigninForm() {
     })
   };
 
-  return (
+  const formComponent = () => (
     <form>
       <div className="d-flex justify-content-center">
         <div className="form-group w-100">
@@ -67,6 +85,21 @@ function SigninForm() {
         </button>
       </div>
     </form>
+  )
+
+  const onSuccess = () => (
+    <div className="text-center">
+      <h3>
+        Welcome back, {name}.
+      </h3>
+      <p>You are being redirected to the Home page...</p>
+    </div>
+  )
+
+  return (
+    <>
+      {success? onSuccess(): formComponent() }
+    </>
   );
 }
 

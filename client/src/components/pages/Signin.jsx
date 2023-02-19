@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.min.css';
 import SigninForm from '../misc/SigninForm';
 
 function Signin() {
+
   return (
     <div className='col-md-6 offset-md-3'>
       <ToastContainer/>
