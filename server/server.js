@@ -23,6 +23,7 @@ const User = require('./models/userModel');
 
 //import routes
 const authRouter = require('./routes/authRoute');
+const userRouter = require('./routes/userRoute');
 
 //app middleware
 app.use(morgan('dev'));
@@ -47,6 +48,7 @@ app.get('/api/users', (req, res) => {
 })
 
 //implement routes
-app.use('/api/auth', authRouter)
+app.use('/api/auth', authRouter);
+app.use('/api/user', userRouter);
 
 app.listen(port, () => console.log(`Server is running at port: ${port} - ${process.env.NODE_ENV}`))
