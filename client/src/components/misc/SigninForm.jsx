@@ -37,7 +37,8 @@ function SigninForm() {
         setValues({...values, email: '', password: '', buttonText: "Submitted"});
         setSuccess(true);     
         setName(response.data.user.name);
-        toast.success(`Hey, ${response.data.user.name}, welcome back!`);
+        // toast.success(`Hey, ${response.data.user.name}, welcome back!`);
+        (isAuth() && isAuth().role === "admin")? navigate("/admin"): navigate(`/profile/${response.data.user.name}`);
 
       })
      

@@ -47,7 +47,7 @@ function Layout({ children }) {
         <li className="nav-item mx-1">
             <span
               onClick={()=>{
-                navigate(`/profile/${isAuth().name}_${isAuth()._id}`)
+                navigate(`/profile/${isAuth().name}}`)
               }}
               className="text-light nav-link"
               style={isActive(`/profile/${isAuth().name}_${isAuth()._id}`)}
