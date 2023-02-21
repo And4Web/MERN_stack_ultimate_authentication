@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const sendGridMail = require("@sendgrid/mail");
+const {expressjwt} = require('express-jwt');
 
 sendGridMail.setApiKey(process.env.SENDGRID_API_KEY);
 
@@ -138,3 +139,8 @@ exports.signin = (req, res) => {
     })
   })
 }
+
+exports.requireSignin = expressjwt({
+  secret: process.env.JWT_SECRET, 
+  algorithms: ["HS256"]
+})

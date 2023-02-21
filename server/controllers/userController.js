@@ -10,3 +10,7 @@ exports.getUser = (req, res) => {
     return res.status(200).json({user: user})
   })
 }
+
+exports.updateUser = (req, res) => {
+  console.log('UPDATE USER<===>req.AUTH:', req.auth, "<===>update data:", req.body)
+}

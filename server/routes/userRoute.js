@@ -1,8 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
-const {getUser} = require('../controllers/userController')
+const {getUser, updateUser} = require('../controllers/userController')
+const {requireSignin} = require('../controllers/authController');
 
-router.get('/:id', getUser);
+router.get('/:id', requireSignin, getUser);
+router.put('/update', requireSignin, updateUser)
 
 module.exports = router;
