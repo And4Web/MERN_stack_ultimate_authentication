@@ -65,3 +65,13 @@ export const signout = (next) => {
   removeFromLocalStorage('user');
   next();
 }
+
+export const updateUserMiddleware = (response, next) => {
+  console.log("UPDATE MIDDLEWARE HELPERS: ", response);
+  if(window !== 'undefined'){
+    let auth = localStorage.getItem('user');
+    auth = response.data;
+    localStorage.setItem("user", auth);
+  }
+  next();
+}

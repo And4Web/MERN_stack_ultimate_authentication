@@ -3,7 +3,7 @@ import {useNavigate} from 'react-router-dom';
 import axios from "axios";
 import { toast } from "react-toastify";
 
-import {isAuth, getFromCookie, signout} from '../misc/helpers';
+import {isAuth, getFromCookie, signout, updateUserMiddleware} from '../misc/helpers';
 
 function Profile() {
   let [values, setValues] = useState({
@@ -11,7 +11,7 @@ function Profile() {
     role: "",
     email: "",
     password: "",
-    buttonText: "Submit",
+    buttonText: "Update",
   });
 
   const navigate = useNavigate();
@@ -54,31 +54,29 @@ function Profile() {
 
   let handleSubmit = (event) => {
     event.preventDefault();
-    setValues({ ...values, buttonText: "Submitting" });
+    setValues({ ...values, buttonText: "Updating" });
     axios({
-      method: "POST",
-      url: `${process.env.REACT_APP_API_URL}/auth/signup`,
-      data: { name, email, password },
+      method: "PUT",
+      url: `${process.env.REACT_APP_API_URL}/user/update`,
+      headers: {
+        Authorization: `Bearer ${token}`
+      },
+      data: { name, password},
     })
       .then((response) => {
-        // console.log('SIGNUP SUCCESS: ', response);
-        setValues({
-          ...values,
-          name: "",
-          email: "",
-          password: "",
-          buttonText: "Submitted",
-        });
-        toast.success(response.data.message);
+        console.log('UPDATE SUCCESS: ', response);
+         updateUserMiddleware(response, ()=>{
+          setValues({
+            ...values, buttonText: "Updated",
+          });
+          toast.success("Updated Profile successfully.");
+        
+         })
       })
       .catch((err) => {
-        // console.log("SIGNUP ERROR: ", err.response.data);
+        console.log("UPDATE ERROR: ", err.response.data);
         setValues({
-          ...values,
-          name: "",
-          email: "",
-          password: "",
-          buttonText: "Submit",
+          ...values, buttonText: "Update",
         });
         toast.error(err.response.data.error);
       });
