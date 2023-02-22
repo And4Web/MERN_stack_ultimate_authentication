@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { isAuth, signout } from "../misc/helpers";
-import { sign } from "jsonwebtoken";
+// import { sign } from "jsonwebtoken";
 
 function Layout({ children }) {
   let location = useLocation();

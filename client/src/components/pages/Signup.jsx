@@ -1,7 +1,7 @@
 import React from 'react';
-import {Link, Navigate} from 'react-router-dom';
-import axios from 'axios';
-import {ToastContainer, toast} from 'react-toastify';
+// import {Link, Navigate} from 'react-router-dom';
+// import axios from 'axios';
+import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 import SignupForm from '../misc/SignupForm';
 

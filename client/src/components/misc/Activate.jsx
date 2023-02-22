@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import {Link, Navigate, useParams} from 'react-router-dom';
+import {useParams} from 'react-router-dom';
 import axios from 'axios';
-import {ToastContainer, toast} from 'react-toastify';
+import { toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 import jwt from 'jsonwebtoken';
 
-function Activate({match}) { 
+function Activate() { 
   let [values, setValues] = useState({
     name: "Anand",
     token: useParams().token,
@@ -18,7 +18,7 @@ function Activate({match}) {
     // console.log(token);
   }, [])
 
-  let { name, token, show } = values;
+  let { name, token} = values;
   // console.log(values);
   let handleSubmit = event => {
     event.preventDefault();
