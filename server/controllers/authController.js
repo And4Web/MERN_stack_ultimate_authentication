@@ -144,3 +144,18 @@ exports.requireSignin = expressjwt({
   secret: process.env.JWT_SECRET, 
   algorithms: ["HS256"]
 })
+
+exports.adminMiddleware = (req, res, next) => {
+  User.findById({_id: req.auth._id}, (err, user)=>{
+    if(err || !user){
+      return res.status(400).json({Error: "User not found."})
+    }
+
+    if(user.role !== "admin"){
+      return res.status(400).json({AdminOnly: "Access Denied."})
+    }
+
+    req.profile = user;
+    next();
+  })
+}
