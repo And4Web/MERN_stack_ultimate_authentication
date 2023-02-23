@@ -159,3 +159,49 @@ exports.adminMiddleware = (req, res, next) => {
     next();
   })
 }
+
+exports.forgotPassword = (req, res) => {
+  const {email} = req.body;
+  User.findOne({email}, (err, user)=>{
+    if(!user || err){
+      return res.status(400).json({Error: "User with this email not found."})
+    }
+    const token = jwt.sign(
+      { _id: user._id },
+      process.env.JWT_RESET_PASSWORD,
+      { expiresIn: "10m" }
+    );
+
+    const emailData = {
+      from: process.env.EMAIL_TO,
+      to: email,
+      subject: `Password Reset link`,
+      html: `
+        <h1>Please click the following Link to reset your password:</h1>
+        <p>${process.env.CLIENT_URL}/auth/password/reset/${token}</p>
+        <hr/>
+        <p>The above link may contain sensitive information. Please don't share it with anyone.</p>
+        <p>${process.env.CLIENT_URL}</p>
+      `,
+    };
+
+    sendGridMail.send(emailData).then(
+      (sent) => {
+        console.log("sendgrid sent email:", sent);
+        return res.json({
+          message: `Email has been sent to ${email}.Follow the instructions to reset your password.`
+        });
+      },
+      (error) => {
+        console.log("sendgrid email sending error:", error);
+        return res.json({
+          message: error
+        })        
+      }
+    );
+
+  })
+};
+
+
+exports.resetPassword = () => {};

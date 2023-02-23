@@ -15,3 +15,10 @@ exports.userSigninValidator = [
   check('password').isLength({min: 8}).withMessage('Password must be at least 8 character long.'),
 ];
 
+exports.forgotPasswordValidator = [
+  check('email').not().isEmpty().isEmail().withMessage("Enter a valid Email.")
+]
+
+exports.resetPasswordValidator = [
+  check('newPassword').not().isEmpty().isLength({min: 8}).withMessage("Password must be at least 8 character long.")
+]
