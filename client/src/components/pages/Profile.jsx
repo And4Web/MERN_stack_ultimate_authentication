@@ -64,13 +64,12 @@ function Profile() {
       data: { name, password},
     })
       .then((response) => {
-        console.log('UPDATE SUCCESS: ', response);
+        console.log('UPDATE SUCCESS: ', response.data.updatedUser);
          updateUserMiddleware(response, ()=>{
           setValues({
             ...values, buttonText: "Updated",
           });
-          toast.success("Updated Profile successfully.");
-        
+          toast.success("Updated Profile successfully.");        
          })
       })
       .catch((err) => {
@@ -107,7 +106,7 @@ function Profile() {
             disabled
               defaultValue={email}
               name={email}
-              onChange={handleChange("email")}
+              
               type="email"
               className="form-control"
             />
@@ -120,7 +119,7 @@ function Profile() {
               disabled
               defaultValue={role}
               name={role}
-              onChange={handleChange("role")}
+              
               type="text"
               className="form-control"
             />
