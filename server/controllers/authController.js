@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const sendGridMail = require("@sendgrid/mail");
 const {expressjwt} = require('express-jwt');
+const lodash = require('lodash');
 
 sendGridMail.setApiKey(process.env.SENDGRID_API_KEY);
 
@@ -185,23 +186,54 @@ exports.forgotPassword = (req, res) => {
       `,
     };
 
-    sendGridMail.send(emailData).then(
-      (sent) => {
-        console.log("sendgrid sent email:", sent);
-        return res.json({
-          message: `Email has been sent to ${email}.Follow the instructions to reset your password.`
-        });
-      },
-      (error) => {
-        console.log("sendgrid email sending error:", error);
-        return res.json({
-          message: error
-        })        
+    return User.updateOne({_id: user._id},{$set: {resetPasswordLink: token}}, (err, success)=>{
+      if(err){
+        return res.status(400).json({resetPasswordUpdateError: "resetPasswordLink can not be stored in database."})
+      } else{
+        sendGridMail.send(emailData).then(
+          (sent) => {
+            console.log("sendgrid sent email:", sent);
+            return res.json({
+              message: `Email has been sent to ${email}.Follow the instructions to reset your password.`
+            });
+          },
+          (error) => {
+            console.log("sendgrid email sending error:", error);
+            return res.json({
+              message: error
+            })        
+          }
+        );
       }
-    );
+    })
+    
 
   })
 };
 
 
-exports.resetPassword = () => {};
+exports.resetPassword = (req, res) => {
+  const {resetPasswordLink, newPassword} = req.body;
+  if(!resetPasswordLink){
+    return res.status(400).json({Error: "Expired reset password Link."})
+  }
+  User.findOne({resetPasswordLink}, (err, user)=>{
+    if(err){
+      return res.status(400).json({Error: "Something went wrong"});
+    }
+    const updatedFields = {
+      password: newPassword,
+      resetPasswordLink: ''
+    }
+
+    user = lodash.extend(user, updatedFields);
+
+    user.save((err, response)=>{
+      if(err){
+        return res.status(400).json({Error: "can't save the updated user."})
+      }
+      res.status(200).json({Success: "Updated the user data successfully."})
+    })
+
+  })
+};

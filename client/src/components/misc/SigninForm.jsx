@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { toast } from "react-toastify";
-import {useNavigate} from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import {Link, useNavigate} from "react-router-dom";
 
 import {authenticate, isAuth} from '../misc/helpers';
 
@@ -42,11 +42,11 @@ function SigninForm() {
 
       })
      
-      if(isAuth()){
-        setTimeout(()=>{
-          navigate('/');       
-        }, 5000)
-      } 
+      // if(isAuth()){
+      //   setTimeout(()=>{
+      //     navigate('/');       
+      //   }, 5000)
+      // } 
     }).catch(err => {
       // console.log("SIGNIN ERROR: ", err.response.data);
       setValues({...values, email: '', password: '', buttonText: 'Submit'});
@@ -79,12 +79,13 @@ function SigninForm() {
           />
         </div>
       </div>
-
+      <Link to="/auth/password/forgot" style={{ cursor: "pointer"}}>Forgot Password?</Link>
       <div className="my-3 d-flex justify-content-center">
         <button onClick={handleSubmit} className="btn btn-primary w-75 ">
           {buttonText}
         </button>
       </div>
+      
     </form>
   )
 
@@ -99,6 +100,7 @@ function SigninForm() {
 
   return (
     <>
+    <ToastContainer/>
       {success? onSuccess(): formComponent() }
     </>
   );

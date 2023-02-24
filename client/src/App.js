@@ -8,7 +8,9 @@ import Profile from "./components/pages/Profile";
 import Activate from "./components/misc/Activate";
 import Private from "./components/layout/Private";
 import Admin from "./components/layout/Admin";
+import Forgot from "./components/misc/Forgot";
 import { ProfilePrivate, AuthPrivate, AdminPrivate } from "./components/misc/PrivateRoute";
+import Reset from "./components/misc/Reset";
 
 function App() {
   return (
@@ -41,6 +43,8 @@ function App() {
           path="/admin"
           element={<AdminPrivate Component={Admin}/>}
         />
+        <Route exact path="/auth/password/forgot" element={<Forgot/>}/>
+        <Route exact path="/auth/password/reset/:token" element={<Reset/>}/>
       </Routes>
     </Layout>
   );
