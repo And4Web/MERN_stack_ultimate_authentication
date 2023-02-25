@@ -9,12 +9,12 @@ function Forgot() {
     buttonText: "Request Password reset link",
   });
 
-  let navigate = useNavigate();
+  // let navigate = useNavigate();
 
   let { email, buttonText } = values;
-  // console.log(values);
+  
   let handleChange = (name) => (event) => {
-    // console.log(event.target)
+    
     setValues({ ...values, [name]: event.target.value });
   };
 
@@ -26,14 +26,13 @@ function Forgot() {
       url: `${process.env.REACT_APP_API_URL}/auth/forgot-password`,
       data: { email },
     })
-      .then((response) => {
-        console.log("FORGOT PASSWORD: ", response);
-        // save the response (user, token) in localstorage/cookie
+      .then((response) => {      
+        
         toast.success(response.data.message);
         setValues({ ...values, buttonText: "Requested" });
       })
       .catch((err) => {
-        // console.log("SIGNIN ERROR: ", err.response.data);
+        console.log("SIGNIN ERROR: ", err.response.data);
         setValues({ ...values, buttonText: "Request Password reset link" });
         toast.error(err.response.data.error);
       });

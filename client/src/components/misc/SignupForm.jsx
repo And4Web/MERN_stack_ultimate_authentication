@@ -13,7 +13,7 @@ function SignupForm() {
   let { name, email, password, buttonText } = values;
   
   let handleChange = name => event => {
-    // console.log(event.target)
+    
     setValues({...values, [name]: event.target.value})
   };
   
@@ -25,7 +25,7 @@ function SignupForm() {
       url: `${process.env.REACT_APP_API_URL}/auth/signup`,
       data: {name, email, password, }
     }).then(response => {
-      // console.log('SIGNUP SUCCESS: ', response);
+      
       setValues({...values, name: '', email: '', password: '', buttonText: 'Submitted'});
       toast.success(response.data.message);
     }).catch(err => {

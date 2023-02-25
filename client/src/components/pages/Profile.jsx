@@ -31,7 +31,7 @@ function Profile() {
       }
     })
     .then(response => {
-      console.log("Profile page Update response: ", response.data.user);
+      
       const {name, email, role} = response.data.user;
       setValues({...values, name, email, role});
     })
@@ -48,7 +48,7 @@ function Profile() {
   let {role, name, email, password, buttonText } = values;
 
   let handleChange = (name) => (event) => {
-    // console.log(event.target)
+ 
     setValues({ ...values, [name]: event.target.value });
   };
 
@@ -64,7 +64,7 @@ function Profile() {
       data: { name, password},
     })
       .then((response) => {
-        console.log('UPDATE SUCCESS: ', response.data.updatedUser);
+        
          updateUserMiddleware(response, ()=>{
           setValues({
             ...values, buttonText: "Updated",

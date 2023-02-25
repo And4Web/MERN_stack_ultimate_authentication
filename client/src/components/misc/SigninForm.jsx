@@ -17,9 +17,9 @@ function SigninForm() {
   let navigate = useNavigate();
 
   let { email, password, buttonText } = values;
-  // console.log(values);
+  
   let handleChange = name => event => {
-    // console.log(event.target)
+   
     setValues({...values, [name]: event.target.value})
   };
 
@@ -31,8 +31,7 @@ function SigninForm() {
       url: `${process.env.REACT_APP_API_URL}/auth/signin`,
       data: {email, password }
     }).then(response => {
-      // console.log('SIGNIN SUCCESS: ', response);
-      // save the response (user, token) in localstorage/cookie
+      
       authenticate(response, ()=>{
         setValues({...values, email: '', password: '', buttonText: "Submitted"});
         setSuccess(true);     

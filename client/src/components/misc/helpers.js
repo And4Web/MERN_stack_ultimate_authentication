@@ -38,7 +38,7 @@ export const removeFromLocalStorage = (key) => {
 
 //authenticate user by passing data to localstorage and cookie during signin
 export const authenticate = (response, next) => {
-  console.log("AUTHENTICATE MIDDLEWARE GETS THIS RESPONSE: ", response)
+  // console.log("AUTHENTICATE MIDDLEWARE GETS THIS RESPONSE: ", response)
 
   setCookie('token', response.data.token);
   setLocalStorage('user', response.data.user);
@@ -67,7 +67,7 @@ export const signout = (next) => {
 }
 
 export const updateUserMiddleware = (response, next) => {
-  console.log("UPDATE MIDDLEWARE HELPERS: ", response);
+  // console.log("UPDATE MIDDLEWARE HELPERS: ", response);
   if(window !== 'undefined'){
     let auth = localStorage.getItem('user');
     auth = response.data;
