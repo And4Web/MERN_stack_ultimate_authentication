@@ -18,7 +18,7 @@ function Layout({ children }) {
     <ul className="nav nav-tabs bg-primary justify-content-center p-1">
       <li className="nav-item mx-1">
         <Link to="/" className="text-light nav-link" style={isActive("/")}>
-          Home
+        <i className="fa-solid fa-house px-2"></i>Home
         </Link>
       </li>
       {!isAuth() ? (
@@ -29,7 +29,7 @@ function Layout({ children }) {
               className="text-light nav-link"
               style={isActive("/signin")}
             >
-              Login
+              <i className="fa-solid fa-right-to-bracket px-2"></i>Login
             </Link>
           </li>
           <li className="nav-item mx-1">
@@ -38,7 +38,7 @@ function Layout({ children }) {
               className="text-light nav-link"
               style={isActive("/signup")}
             >
-              Register
+              <i className="fa-solid fa-user-plus px-2"></i>Register
             </Link>
           </li>
         </>
