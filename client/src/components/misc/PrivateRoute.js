@@ -9,7 +9,7 @@ export const ProfilePrivate = (props) => {
     if (!isAuth()) {
       navigate("/signin");
     }
-  });
+  }, [isAuth]);
   return (
     <>
       <Component />
@@ -23,7 +23,7 @@ export const AuthPrivate = ({ Component }) => {
     if (isAuth()) {
       navigate("/");
     }
-  });
+  }, [isAuth]);
 
   return (
     <>
@@ -42,7 +42,7 @@ export const AdminPrivate = ({Component}) => {
     if(condition()){
       navigate('/');
     }
-  })
+  }, [condition])
   // console.log("let condition: ", isAuth() && isAuth().role !== "admin");
   // console.log("isAdmin: " , condition());
   return(
