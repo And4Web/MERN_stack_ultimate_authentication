@@ -19,6 +19,7 @@ mongoose.connect(process.env.DATABASE, {
 .then(() => console.log('mongoDB connection successful.'))
 .catch(err => console.log('mongoDB connection Error: ', err))
 
+//User model
 const User = require('./models/userModel');
 
 //import routes
@@ -28,19 +29,19 @@ const userRouter = require('./routes/userRoute');
 //app middleware
 app.use(morgan('dev'));
 app.use(bodyParser.json());
+// app.use(express.json()); // can be used in place of body parser.
 // app.use(cors); //cross origin requests
 if(process.env.NODE_ENV = 'development'){
   app.use(cors({origin: 'http://localhost:3000'}))
 }
 
-//middleware
-
+//basic/test route middleware
 app.get('/', (req, res) => {
   res.send("Hello Anand! 🤠");
 })
 app.get('/api/users', (req, res) => {
  User.find({}, {hashedPassword: 0, salt: 0, __v:0}).then(user => {  
-  res.status(200).json(user)
+  res.status(200).json({"all Users": user})
  }).catch(err=>{
   // console.log("Error finding users: ", err.message);
   res.status(400).json({Error: `Error finding user: ${err.message}`})

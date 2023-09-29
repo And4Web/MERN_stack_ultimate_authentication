@@ -59,7 +59,7 @@ userSchema.methods = {
     }
   },  
   makeSalt: function (){
-    return Math.round(new Date().valueOf()*Math.random()) + '';
+    return Math.round(new Date().valueOf()*Math.random()) + ''; //convert the number returned from Math.round() to string.
   }
 }
 
