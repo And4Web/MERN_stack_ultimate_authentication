@@ -18,8 +18,7 @@ function SigninForm() {
 
   let { email, password, buttonText } = values;
   
-  let handleChange = name => event => {
-   
+  let handleChange = name => event => {   
     setValues({...values, [name]: event.target.value})
   };
 

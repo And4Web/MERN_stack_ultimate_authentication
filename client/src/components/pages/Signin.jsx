@@ -14,7 +14,7 @@ function Signin() {
         <ToastContainer />
         <h1 className="text-center"></h1>
         <Google/>
-        <h4 className="text-center pt-5">Sign in with Email </h4>
+        <h4 className="text-center pt-5">Sign in with Email</h4>
         <SigninForm />
       
     </div>

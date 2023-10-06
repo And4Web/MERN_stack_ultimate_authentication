@@ -85,7 +85,6 @@ function Profile() {
     <>
       <h1>Profile page for authenticated users only: Update</h1>
       <form>
-        {/* {JSON.stringify({...values})} */}
         <div className="d-flex justify-content-center">
           <div className="form-group w-100">
             <label className="text-muted">Name</label>
@@ -103,10 +102,9 @@ function Profile() {
           <div className="form-group w-100">
             <label className="text-muted">Email</label>
             <input
-            disabled
+              disabled
               defaultValue={email}
-              name={email}
-              
+              name={email}              
               type="email"
               className="form-control"
             />
@@ -118,8 +116,7 @@ function Profile() {
             <input
               disabled
               defaultValue={role}
-              name={role}
-              
+              name={role}              
               type="text"
               className="form-control"
             />

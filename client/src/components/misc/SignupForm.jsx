@@ -37,7 +37,6 @@ function SignupForm() {
 
   return (
     <form>
-      {/* {JSON.stringify({...values})} */}
       <div className="d-flex justify-content-center">
         <div className="form-group w-100">
           <label className="text-muted">Name</label>

@@ -1,16 +1,20 @@
 import React from "react";
-import Layout from "./components/layout/layout";
 import { Routes, Route } from "react-router-dom";
+
+import Layout from "./components/layout/layout";
+import Private from "./components/layout/Private";
+import Admin from "./components/layout/Admin";
+
 import Signin from "./components/pages/Signin";
 import Signup from "./components/pages/Signup";
 import Home from "./components/pages/Home";
 import Profile from "./components/pages/Profile";
+
 import Activate from "./components/misc/Activate";
-import Private from "./components/layout/Private";
-import Admin from "./components/layout/Admin";
 import Forgot from "./components/misc/Forgot";
-import { ProfilePrivate, AuthPrivate, AdminPrivate } from "./components/misc/PrivateRoute";
 import Reset from "./components/misc/Reset";
+
+import { ProfilePrivate, AuthPrivate, AdminPrivate } from "./components/misc/PrivateRoute";
 
 function App() {
   return (
